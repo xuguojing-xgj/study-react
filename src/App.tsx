@@ -63,7 +63,11 @@ function App() {
             }}/>
 
             {/*条件渲染*/}
-            {content}
+            <div> {content} </div>
+            {/* 条件运算符 与 if 不同的是 它运行与JSX内部 */}
+            <div> {isLoggedIn ? (<AdminPanel/>) : (<LoginForm/>)}</div>
+            {/* 当不需要else 分支时  当不写 {} <- React渲染语法时 只会读取文本 必须要写 渲染 语法 -> {} */}
+            <div> {isLoggedIn && <LoginForm></LoginForm>} </div>
         </>
     )
 }
