@@ -4,9 +4,16 @@
 import './public.css'
 
 function MyButton() {
+    // 在组件中声明 事件处理 函数来响应事件
+    function handleClick() {
+        alert('You Clicked me!')
+    }
     return (
-        <button>这是个按钮</button>
-    )
+        // 需要注意的是 onClick={handleClick} 的结尾没有小括号
+        // 不要 调用 事件处理函数 只需要 传递给事件 即可
+        // 当用户 点击按钮时 React 会调用你的事件处理函数
+        <button onClick={handleClick}> Click me </button>
+    );
 }
 
 function AdminPanel() {
@@ -14,7 +21,7 @@ function AdminPanel() {
         <>
             <h1>AdminPanel</h1>
         </>
-    )
+    );
 }
 
 function LoginForm() {
@@ -22,7 +29,7 @@ function LoginForm() {
         <>
             <h1>LoginForm </h1>
         </>
-    )
+    );
 }
 
 
