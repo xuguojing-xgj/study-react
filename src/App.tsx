@@ -8,11 +8,14 @@ function MyButton() {
     function handleClick() {
         alert('You Clicked me!')
     }
+
     return (
-        // 需要注意的是 onClick={handleClick} 的结尾没有小括号
-        // 不要 调用 事件处理函数 只需要 传递给事件 即可
-        // 当用户 点击按钮时 React 会调用你的事件处理函数
-        <button onClick={handleClick}> Click me </button>
+        <>
+            // 需要注意的是 onClick={handleClick} 的结尾没有小括号
+            // 不要 调用 事件处理函数 只需要 传递给事件 即可
+            // 当用户 点击按钮时 React 会调用你的事件处理函数
+            <button onClick={handleClick}> Click me </button>
+        </>
     );
 }
 
