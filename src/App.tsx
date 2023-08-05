@@ -25,23 +25,35 @@ function LoginForm() {
     )
 }
 
-// 条件渲染
-// React.ReactNode 是类型别名 用于表示可以作为 React 元素渲染的任何内容。
-let content: React.ReactNode;
-const isLoggedIn: boolean = true;
-if (isLoggedIn) {
-    content = <AdminPanel/>
-} else {
-    content = <LoginForm/>
-}
 
 function App() {
-
+    // 条件渲染
+    // React.ReactNode 是类型别名 用于表示可以作为 React 元素渲染的任何内容。
+    let content: React.ReactNode;
+    const isLoggedIn: boolean = true;
+    if (isLoggedIn) {
+        content = <AdminPanel/>
+    } else {
+        content = <LoginForm/>
+    }
     const user = {
         name: 'Hedy Lamarr',
         imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
         imageSize: 90,
     }
+    const products = [
+        {title: 'Cabbage', isFruit: false, id: 1},
+        {title: 'Garlic', isFruit: false, id: 2},
+        {title: 'Apple', isFruit: true, id: 3},
+    ]
+    const listItems = products.map(product =>
+        // key属性 用于在其兄弟节点中唯一标识该元素
+        <li key={product.id} style={{
+            color: product.isFruit ? 'red' : 'green'
+        }}>
+            {product.title}
+        </li>
+    )
     return (
         // 组件不可以返回多个jsx标签 必须将他们包裹到一个共享父级中
         // 比如 <div>...</div> 或者 使用空的 <>...</> 包裹
@@ -66,8 +78,14 @@ function App() {
             <div> {content} </div>
             {/* 条件运算符 与 if 不同的是 它运行与JSX内部 */}
             <div> {isLoggedIn ? (<AdminPanel/>) : (<LoginForm/>)}</div>
-            {/* 当不需要else 分支时  当不写 {} <- React渲染语法时 只会读取文本 必须要写 渲染 语法 -> {} */}
+            {/* 当不需要else 分支时  当不写 {}  React渲染语法时 只会读取文本 必须要写 渲染 语法  {} */}
             <div> {isLoggedIn && <LoginForm></LoginForm>} </div>
+
+            {/* 列表渲染 */}
+            {/* React中的列表渲染 则依赖JavaScript 中的for循环 和 array的map()函数   */}
+            <ul>
+                {listItems}
+            </ul>
         </>
     )
 }
