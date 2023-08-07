@@ -2,19 +2,31 @@
 // 声明 MyButton 组件
 // react 组件必须以大写开头 而HTML标签则必须以小写开头
 import './public.css'
+import React from "react";
+// 从 React 引入 useState：
+import {useState} from 'react';
 
+// React 程序是由"组件"组成的。一个组件是UI(用户界面)的一部分, 它拥有自己的逻辑和外观。
+// 组件可以小到一个按钮,也可以大到整个页面
 function MyButton() {
+    // 声明变量
+    // useState 中获得的两样东西: 当前的 state(count), 以及用于更新它的函数(setCount)。
+    // 你可以给它们(当前的state(count),和 更新它的函数(setCount))起任何名字
+    // 但是要按照惯例,需要按照规定的命名方式为它们命名[something,setSomething]
+    const [count, setCount] = useState(0)
+
     // 在组件中声明 事件处理 函数来响应事件
     function handleClick() {
-        alert('You Clicked me!')
+        // alert('You Clicked me!')
+        setCount(count + 1)
     }
 
     return (
         <>
-            // 需要注意的是 onClick={handleClick} 的结尾没有小括号
-            // 不要 调用 事件处理函数 只需要 传递给事件 即可
-            // 当用户 点击按钮时 React 会调用你的事件处理函数
-            <button onClick={handleClick}> Click me </button>
+            {/* 需要注意的是 onClick={handleClick} 的结尾没有小括号*/}
+            {/* 不要 调用 事件处理函数 只需要 传递给事件 即可*/}
+            {/* 当用户 点击按钮时 React 会调用你的事件处理函数*/}
+            <button onClick={handleClick}> count is {count}</button>
         </>
     );
 }
@@ -47,7 +59,7 @@ function App() {
         content = <LoginForm/>
     }
     const user = {
-        name: 'Hedy Lamarr',
+        name: 'Hedy Lamar',
         imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
         imageSize: 90,
     }
@@ -56,6 +68,8 @@ function App() {
         {title: 'Garlic', isFruit: false, id: 2},
         {title: 'Apple', isFruit: true, id: 3},
     ]
+    {/* React中的列表渲染 则依赖JavaScript 中的for循环 和 array的map()函数   */
+    }
     const listItems = products.map(product =>
         // key属性 用于在其兄弟节点中唯一标识该元素
         <li key={product.id} style={{
@@ -69,7 +83,6 @@ function App() {
         // 比如 <div>...</div> 或者 使用空的 <>...</> 包裹
         <>
             <h1>Welcome to my app</h1>
-            <MyButton></MyButton>
             <br/>
             {/*    添加样式*/}
             <h2>{user.name}</h2>
@@ -92,10 +105,15 @@ function App() {
             <div> {isLoggedIn && <LoginForm></LoginForm>} </div>
 
             {/* 列表渲染 */}
-            {/* React中的列表渲染 则依赖JavaScript 中的for循环 和 array的map()函数   */}
             <ul>
                 {listItems}
             </ul>
+
+            {/*更新界面 使用React Hooks */}
+            <MyButton></MyButton>
+            <br/>
+            <MyButton></MyButton>
+            
         </>
     )
 }
