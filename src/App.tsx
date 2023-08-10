@@ -6,13 +6,12 @@ import React, {useState} from "react";
 // 组件可以小到一个按钮,也可以大到整个页面
 interface MySquare {
     value: string | null;
-    onSquareClick: (i:never) => void;
+    onSquareClick: () => void;
 }
 
 const Square: React.FC<MySquare> = ({value, onSquareClick}) => {
     return (
         <>
-            {/*向父组件传递*/}
             <button className="square" onClick={onSquareClick}> {value} </button>
         </>
     )
@@ -27,7 +26,7 @@ function Board() {
     const [squares, setSquares] = useState(Array(9).fill(""));
 
     // 最后在 Board 组件内定义 handleClick 函数来更新并保存棋盘 state 的 squares 数组
-    function handleClick(i:never) {
+    function handleClick(i: number) {
         const nextSquares = squares.slice();
         nextSquares[i] = 'x';
         setSquares(nextSquares);
@@ -38,20 +37,21 @@ function Board() {
         <>
             <div className={"board-row"}>
                 {/*向下传递*/}
-                {/*handleClick(0) 的话*/}
-                <Square value={squares[0]} onSquareClick={handleClick}/>
-                <Square value={squares[1]}/>
-                <Square value={squares[2]}/>
+                {/*handleClick(0) 的话 导致无限循环 不能直接调用*/}
+                {/*{ () => handleClick(0) } 这样将会是传递一个函数 而不是直接调用 这将解决无限循环的问题 */}
+                <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
+                <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
+                <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
             </div>
             <div className={"board-row"}>
-                <Square value={squares[3]}/>
-                <Square value={squares[4]}/>
-                <Square value={squares[5]}/>
+                <Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
+                <Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
+                <Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
             </div>
             <div className={"board-row"}>
-                <Square value={squares[6]}/>
-                <Square value={squares[7]}/>
-                <Square value={squares[8]}/>
+                <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
+                <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
+                <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
             </div>
         </>
     );
