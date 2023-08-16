@@ -23,18 +23,70 @@ function Board() {
     // Array(9).fill("") 创建了一个包含9个元素的数组, 并将每个元素设置为"",
     // ["","","x","x","x","o","o","o",""]
     // state 对于定义它的组件是私有的 因此不能直接Square更新Board
+    // squares 值为 ['', '', '', '', '', '', '', '', '']
     const [squares, setSquares] = useState(Array(9).fill(""));
+    // 交替落子
+    // 记录x是否已经落子 默认为true 开始为x 落子
+    const [xIsNext, setXIsNext] = useState(true);
+
+    const winner = calculateWinner(squares);
+    let status;
+    if (winner) {
+        status = 'winner: ' + winner;
+    } else {
+        status = 'Next player: ' + (xIsNext ? 'x' : 'o')
+    }
 
     // 最后在 Board 组件内定义 handleClick 函数来更新并保存棋盘 state 的 squares 数组
     function handleClick(i: number) {
+        // 这里判断 棋盘上是否已经落子 不允许在 同一个地方重复落子
+        if (squares[i] || calculateWinner(squares)) {
+            return
+        }
+        // React 不变性
+        // 1.不变性使复杂的功能更容易实现
+        // 2.默认情况下,当父组件的state发生变化时,所有子组件都会自动重新渲染, 这甚至包括未受变化影响的子组件
+        //   不变性使得组件比较其数据是否已更改的成本非常低
         const nextSquares = squares.slice();
-        nextSquares[i] = 'x';
+        // 判断
+        if (xIsNext) {
+            nextSquares[i] = 'x';
+        } else {
+            nextSquares[i] = 'o';
+        }
+
         setSquares(nextSquares);
+        setXIsNext(!xIsNext)
+    }
+
+    // 宣布获胜者
+    function calculateWinner(squares: string[]): string {
+        const lines: number[][] = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ]
+
+        for (let i = 0; i < lines.length; i++) {
+            // 结构循环出来的二维数组
+            const [a, b, c] = lines[i]
+            if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                return squares[a]
+            }
+        }
+        return "";
     }
 
     return (
         // 构建棋盘
         <>
+            {/* 显示该谁落子 */}
+            <div className={'status'}> {status} </div>
             <div className={"board-row"}>
                 {/*向下传递*/}
                 {/*handleClick(0) 的话 导致无限循环 不能直接调用*/}
