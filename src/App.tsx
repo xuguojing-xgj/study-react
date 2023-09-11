@@ -15,7 +15,7 @@ const MyButton = ({title, name}: { title: string, name: string }) => {
 
 // interface type 类型
 interface MyButtonProps {
-    diffEnabled: boolean | string;
+    diffEnabled: number;
     diffStatus: string;
     //按钮文字
     title: string;
@@ -24,7 +24,7 @@ interface MyButtonProps {
     clickFunc: () => void;
 }
 
-const MyBottons = ({diffEnabled,diffStatus, title, disabled, clickFunc}: MyButtonProps) => {
+const MyBottons = ({diffEnabled, diffStatus, title, disabled, clickFunc}: MyButtonProps) => {
     return (
         <>
             <h5> {diffEnabled} </h5>
@@ -38,21 +38,19 @@ const MyBottons = ({diffEnabled,diffStatus, title, disabled, clickFunc}: MyButto
 type Status = "idle" | "loading" | "success" | "error"
 export default function App() {
     // hooks类型声明 基本类型
-    const [enabled, setEnabled] = useState<boolean | string>(false)
+    const [enabled, setEnabled] = useState<number>(0)
 
     const [status, setStatus] = useState<Status>('idle')
 
     function fatherFunc() {
-        if (!enabled) {
-            setEnabled('2')
-            // setEnabled(() => {
-            //     return '2'
-            // })
-            console.log('enabled', enabled)
-        }
+        // setEnabled('2')
+        // state快照
+        // 命名惯例 通常以通过相应 state 变量的第一个字母来命名更新函数的参数
+        setEnabled(e => e + 1)
+        console.log('enabled', enabled)
         if (status != 'success') {
             setStatus('error')
-            console.log('status',status)
+            console.log('status', status)
         }
     }
 
@@ -60,7 +58,8 @@ export default function App() {
         <>
             <MyButton title={'我是一个按钮'} name={'小明'}></MyButton>
             <br/>
-            <MyBottons diffEnabled={enabled} diffStatus={status} title={'我是禁用按钮'} disabled={false} clickFunc={fatherFunc}></MyBottons>
+            <MyBottons diffEnabled={enabled} diffStatus={status} title={'我是禁用按钮'} disabled={false}
+                       clickFunc={fatherFunc}></MyBottons>
         </>
     )
 }
