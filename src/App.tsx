@@ -35,18 +35,26 @@ const MyBottons = ({diffEnabled, diffStatus, title, disabled, clickFunc}: MyButt
 }
 
 // 联合类型
-type Status = "idle" | "loading" | "success" | "error"
+type Status = "idle" | "loading" | "success" | "error";
+// type RequestState =
+//     | { status: 'idle' }
+//     | { status: 'loading' }
+//     | { status: 'success', data: 'any' }
+//     | { status: 'error', error: Error }
 export default function App() {
     // hooks类型声明 基本类型
     const [enabled, setEnabled] = useState<number>(0)
 
     const [status, setStatus] = useState<Status>('idle')
 
+    // const [requestState, setRequestState] = useState<RequestState>({status: 'idle'})
     function fatherFunc() {
         // setEnabled('2')
         // state快照
         // 命名惯例 通常以通过相应 state 变量的第一个字母来命名更新函数的参数
-        setEnabled(e => e + 1)
+        // React更新加入队列
+        // 批处理
+        setEnabled(e => e + 2)
         console.log('enabled', enabled)
         if (status != 'success') {
             setStatus('error')
