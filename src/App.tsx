@@ -63,8 +63,11 @@ const stateReducer = (state: State, action: CounterAction): State => {
     }
 }
 
-type Theme = 'light' | 'dark' | 'system' | {
-    kind: string
+// type Theme = 'light' | 'dark' | 'system' | {
+//     kind: number
+// };
+type Theme = {
+    kind: number
 };
 // 从传递给createContext调用的值推断context提供的值的类型
 // 当没有一个合理的默认值时,这样编写是可以的,
@@ -81,7 +84,7 @@ const useGetTheme = () => useContext(ThemeContext);
 const useGetThemeTypeIsNull = () => {
     const isNull = useGetTheme()
     if (!isNull) {
-        throw new Error('useGetThemeTypeIsNull must be used within a Provider')
+        throw new Error('useGetTheme must be used within a Provider')
     }
     return isNull
 }
@@ -117,7 +120,7 @@ export default function App() {
 
     // const [theme, setTheme] = useState<Theme>('light')
     const theme = useMemo(() => ({
-        kind: 'light'
+        kind: 0
     }), [])
 
     function fatherFunc() {
