@@ -2,7 +2,8 @@
 
 // 内联语法
 import {useState, useReducer, createContext, useContext, useMemo} from "react";
-import {Button, Space} from 'antd';
+import {CommentOutlined, CustomerServiceOutlined} from '@ant-design/icons';
+import {Button, Steps, FloatButton, Switch} from 'antd';
 
 const MyButton = ({title, name}: { title: string, name: string }) => {
     return (
@@ -144,6 +145,15 @@ export default function App() {
 
     const addFive = () => dispatch({type: 'setCount', value: state.count + 1})
     const reset = () => dispatch({type: 'reset'})
+
+    const description = 'This is a description.';
+
+    const [open, setOpen] = useState(false);
+
+    const onChange = (checked: boolean) => {
+        console.log('checked',checked)
+        setOpen(checked);
+    };
     return (
         <>
             <MyButton title={'我是一个按钮'} name={'小明'}></MyButton>
@@ -160,10 +170,41 @@ export default function App() {
                 <ThemeTemplate themeFunc={themeFunc}></ThemeTemplate>
             </ThemeContext.Provider>
             {/*<Space >*/}
-                <Button type="primary">Primary Button</Button>
-                <Button>Default Button</Button>
-                <Button type="text">Text Button</Button>
+            <Button type="primary">Primary Button</Button>
+            <Button>Default Button</Button>
+            <Button type="text">Text Button</Button>
             {/*</Space>*/}
+
+            <Steps
+                direction="vertical"
+                current={2}
+                items={[
+                    {
+                        title: 'Finished',
+                        description,
+                    },
+                    {
+                        title: 'In Progress',
+                        description,
+                    },
+                    {
+                        title: 'Waiting',
+                        description,
+                    },
+                ]}
+            />
+
+            <FloatButton.Group
+                open={open}
+                trigger="click"
+                style={{ right: 24 }}
+                onOpenChange={onChange}
+                icon={<CustomerServiceOutlined />}
+            >
+                <FloatButton />
+                <FloatButton icon={<CommentOutlined />} />
+            </FloatButton.Group>
+            {/*<Switch onChange={onChange} checked={open} style={{ margin: 16 }} />*/}
         </>
     )
 }

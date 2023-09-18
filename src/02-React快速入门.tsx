@@ -9,6 +9,7 @@ interface MyButton {
     count: number;
     onClick: () => void;
 }
+
 // React 程序是由"组件"组成的。一个组件是UI(用户界面)的一部分, 它拥有自己的逻辑和外观。
 // 组件可以小到一个按钮,也可以大到整个页面
 const MyButton: React.FC<MyButton> = ({count, onClick}) => {
@@ -27,7 +28,7 @@ function App() {
     // 在组件中声明 事件处理 函数来响应事件
     function handleClick() {
         // alert('You Clicked me!')
-        setCount(count + 1)
+        setCount(c => c + 1)
     }
 
     return (
