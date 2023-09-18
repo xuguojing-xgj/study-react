@@ -3,7 +3,8 @@
 // 内联语法
 import {useState, useReducer, createContext, useContext, useMemo} from "react";
 import {CommentOutlined, CustomerServiceOutlined} from '@ant-design/icons';
-import {Button, Steps, FloatButton, Switch} from 'antd';
+import {Button, Steps, FloatButton,} from 'antd';
+import './public.css';
 
 const MyButton = ({title, name}: { title: string, name: string }) => {
     return (
@@ -109,21 +110,21 @@ const ThemeTemplate = ({themeFunc}: ThemeFunc) => {
 }
 export default function App() {
     // hooks类型声明 基本类型
-    const [enabled, setEnabled] = useState<number>(0)
+    const [enabled, setEnabled] = useState<number>(0);
 
-    const [status, setStatus] = useState<Status>('idle')
+    const [status, setStatus] = useState<Status>('idle');
 
     // const [requestState, setRequestState] = useState<RequestState>({status: 'idle'})
     // useReducer是一个更复杂的hook,它接受一个reducer函数和一个初始state作为参数,
     // 并将冲初始state推断出reducer函数的类型
     // 可以选择性地为useReducer提供类型参数以为state提供类型,
     // 但更高的做法仍然是在初始state上添加类型
-    const [state, dispatch] = useReducer(stateReducer, initialState)
+    const [state, dispatch] = useReducer(stateReducer, initialState);
 
     // const [theme, setTheme] = useState<Theme>('light')
     const theme = useMemo(() => ({
         kind: 0
-    }), [])
+    }), []);
 
     function fatherFunc() {
         // setEnabled('2')
@@ -143,15 +144,15 @@ export default function App() {
 
     }
 
-    const addFive = () => dispatch({type: 'setCount', value: state.count + 1})
-    const reset = () => dispatch({type: 'reset'})
+    const addFive = () => dispatch({type: 'setCount', value: state.count + 1});
+    const reset = () => dispatch({type: 'reset'});
 
+    const [steps, ] = useState(2);
     const description = 'This is a description.';
 
     const [open, setOpen] = useState(false);
 
     const onChange = (checked: boolean) => {
-        console.log('checked',checked)
         setOpen(checked);
     };
     return (
@@ -165,6 +166,11 @@ export default function App() {
             <p>计数: {state.count}</p>
             <button onClick={addFive}>加1</button>
             <button onClick={reset}>重置</button>
+
+            <div className={'rectangle'}>
+                {'我是一个div'}
+                <div className={'triangle'}></div>
+            </div>
             {/**/}
             <ThemeContext.Provider value={theme}>
                 <ThemeTemplate themeFunc={themeFunc}></ThemeTemplate>
@@ -177,7 +183,7 @@ export default function App() {
 
             <Steps
                 direction="vertical"
-                current={2}
+                current={steps}
                 items={[
                     {
                         title: 'Finished',
@@ -197,12 +203,12 @@ export default function App() {
             <FloatButton.Group
                 open={open}
                 trigger="click"
-                style={{ right: 24 }}
+                style={{right: 24}}
                 onOpenChange={onChange}
-                icon={<CustomerServiceOutlined />}
+                icon={<CustomerServiceOutlined/>}
             >
-                <FloatButton />
-                <FloatButton icon={<CommentOutlined />} />
+                <FloatButton/>
+                <FloatButton icon={<CommentOutlined/>}/>
             </FloatButton.Group>
             {/*<Switch onChange={onChange} checked={open} style={{ margin: 16 }} />*/}
         </>
