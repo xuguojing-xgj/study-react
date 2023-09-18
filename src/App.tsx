@@ -2,6 +2,7 @@
 
 // 内联语法
 import {useState, useReducer, createContext, useContext, useMemo} from "react";
+import {Button, Space} from 'antd';
 
 const MyButton = ({title, name}: { title: string, name: string }) => {
     return (
@@ -158,6 +159,11 @@ export default function App() {
             <ThemeContext.Provider value={theme}>
                 <ThemeTemplate themeFunc={themeFunc}></ThemeTemplate>
             </ThemeContext.Provider>
+            {/*<Space >*/}
+                <Button type="primary">Primary Button</Button>
+                <Button>Default Button</Button>
+                <Button type="text">Text Button</Button>
+            {/*</Space>*/}
         </>
     )
 }
