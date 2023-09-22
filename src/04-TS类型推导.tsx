@@ -108,7 +108,7 @@ const ThemeTemplate = ({themeFunc}: ThemeFunc) => {
     )
 
 }
-export default function App() {
+function App() {
     // hooks类型声明 基本类型
     const [enabled, setEnabled] = useState<number>(0);
 
@@ -214,3 +214,5 @@ export default function App() {
         </>
     )
 }
+
+export default App

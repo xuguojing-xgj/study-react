@@ -3,9 +3,12 @@
 }
 
 body {
+    width: 100vh;
+    min-height: 100vh;
     font-family: sans-serif;
-    margin: 20px;
+    margin: 100px auto;
     padding: 0;
+    background: linear-gradient(to bottom right, blue, pink);
 }
 
 h1 {
@@ -74,6 +77,7 @@ ul {
 .status {
     margin-bottom: 10px;
 }
+
 .game {
     display: flex;
     flex-direction: row;
@@ -101,4 +105,60 @@ ul {
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-top: 12px solid skyblue;
+}
+
+.content {
+    display: flex;
+    width: 536px;
+    height: 219px;
+    border-radius: 20px;
+}
+
+.leftBox {
+    width: 180px;
+    height: 100%;
+
+}
+
+.leftBox img {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.rightBox {
+    width: 356px;
+    padding: 20px;
+    background: white;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.rightBox .text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rightBox .text .leftText {
+    color: #495968;
+}
+
+.rightBox .text .rightText {
+    color: #495968;
+    font-weight: 700;
+}
+
+.rightBox .pText {
+    color: #898a8f;
+    font-size: 13px;
+}
+
+.rightBox .btn {
+    margin-top: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn .leftBtn {
+    cursor: pointer;
 }
