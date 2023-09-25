@@ -64,13 +64,22 @@ function App() {
     // 当逐渐适应React 和 TS 的搭配使用后, 可以尝试阅读@types/react,此库提供了一整套类型
     // 你可以在DefinitelyTyped的React目录中找到它们,我们将在这里介绍一些比较常见的类型
 
+    // DOM事件
+    // 在React中处理DOM事件时,事件的类型通常可以从事件处理程序中推断出来,但是,当你想提取一个函数以传递给事件处理程序时,
+    // 你需要明确设置事件的类型
+
+    const [inputValue, setInputVlaue] = useState('')
+    const changeEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event)
+        setInputVlaue(event.currentTarget.value)
+    }
     return (
         <>
             <Card></Card>
 
             <div style={{marginTop: '20px'}}>
                 <Input placeholder="default size" prefix={<UserOutlined/>} value={value} onChange={handleChange}/>
-                <input value={value} onChange={handleChange}/>
+                <input value={inputValue} onChange={changeEvent}/>
                 <p> 值: {value} </p>
             </div>
         </>
