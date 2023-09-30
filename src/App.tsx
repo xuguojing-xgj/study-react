@@ -42,10 +42,14 @@ const Card = () => {
 // 描述子元素两种常见的方法
 // 第一种方法React.ReactNode
 // 第二种方法React.ReactElement
+// 样式属性
+// 在React中使用内联样式时,可以使用React.CSSProperties传递给style属性对象
+// React.CSSProperties类型是所有可能的css类型集合
 interface ModalRendererProps {
-    title: string,
-    anyNode: React.ReactNode, // 定义子元素的任意类型
-    ele: React.ReactElement, // 只包括jsx元素, 而不包括js原始类型
+    title?: string,
+    anyNode?: React.ReactNode, // 定义子元素的任意类型
+    ele?: React.ReactElement, // 只包括jsx元素, 而不包括js原始类型
+    style?: React.CSSProperties,
 }
 
 const ReactNodeElement = (props: ModalRendererProps) => <>
@@ -109,7 +113,9 @@ function App() {
                     ele只接收jsx元素类型,并不包括js元素类型
                     title定义为字符串
              */}
-            <ReactNodeElement anyNode={<p style={{color:"red"}}> 我是一个p标签 </p>} ele={<div>我是一个div</div>} title={'我是一个字符串'}></ReactNodeElement>
+            <ReactNodeElement anyNode={<p style={{color: "red"}}> 我是一个p标签 </p>} ele={<div>我是一个div</div>}
+                              title={'我是一个字符串'}></ReactNodeElement>
+            <ReactNodeElement anyNode={1}></ReactNodeElement>
         </>
     )
 
