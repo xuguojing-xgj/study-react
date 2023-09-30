@@ -39,6 +39,20 @@ const Card = () => {
     )
 }
 
+// 描述子元素两种常见的方法
+// 第一种方法React.ReactNode
+// 第二种方法React.ReactElement
+interface ModalRendererProps {
+    title: string,
+    anyNode: React.ReactNode, // 定义子元素的任意类型
+    ele: React.ReactElement, // 只包括jsx元素, 而不包括js原始类型
+}
+
+const ReactNodeElement = (props: ModalRendererProps) => <>
+    <div>React.ReactNode: {props.anyNode} </div>
+    <div> React.ReactElement {props.ele} </div>
+</>
+
 function App() {
     // useMemo 是一个React hook 它在每次重新渲染的时候能够缓存计算的结果;
     // filterTodos 的返回值推断 visibleTodos 的类型;
@@ -68,11 +82,16 @@ function App() {
     // 在React中处理DOM事件时,事件的类型通常可以从事件处理程序中推断出来,但是,当你想提取一个函数以传递给事件处理程序时,
     // 你需要明确设置事件的类型
 
-    const [inputValue, setInputVlaue] = useState('')
+    const [inputValue, setInputValue] = useState('')
+
+    // DOM事件 明确设置事件类型
+    // DOM常用事件示例: https://developer.mozilla.org/zh-CN/docs/Web/Events
+    // 官网类型示例: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/b580df54c0819ec9df62b0835a315dd48b8594a9/types/react/index.d.ts#L1247C1-L1373
     const changeEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event)
-        setInputVlaue(event.currentTarget.value)
+        setInputValue(event.currentTarget.value)
     }
+
     return (
         <>
             <Card></Card>
@@ -82,6 +101,15 @@ function App() {
                 <input value={inputValue} onChange={changeEvent}/>
                 <p> 值: {value} </p>
             </div>
+
+
+            {/*示例*/}
+            {/* 示例中:
+                    anyNode可以接收任意类型的jsx元素以及js原始类型
+                    ele只接收jsx元素类型,并不包括js元素类型
+                    title定义为字符串
+             */}
+            <ReactNodeElement anyNode={<p style={{color:"red"}}> 我是一个p标签 </p>} ele={<div>我是一个div</div>} title={'我是一个字符串'}></ReactNodeElement>
         </>
     )
 
