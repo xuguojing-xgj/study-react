@@ -171,7 +171,6 @@ ul {
     background-color: #000;
     display: flex;
     flex-direction: column;
-    justify-content: end;
     padding: 12px;
     gap: 12px;
     border-radius: 8px;
