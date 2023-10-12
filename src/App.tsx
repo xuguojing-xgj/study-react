@@ -1,4 +1,23 @@
 // 在jsx/tsx中使用大括号编写JavaScript
+import './public.css'
+
+const Card = () => {
+    return (
+        <>
+            <div className="card">
+                <p className="heading">
+                    Popular this month
+                </p>
+                <p>
+                    Powered By
+                </p>
+                <p>
+                    Uiverse
+                </p>
+            </div>
+        </>
+    )
+}
 
 
 const person = {
@@ -43,7 +62,7 @@ const App = () => {
                 </ul>
             </div>
 
-
+            <Card></Card>
         </>
     )
 }

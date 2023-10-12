@@ -2,9 +2,8 @@
 // 声明 MyButton 组件
 // react 组件必须以大写开头 而HTML标签则必须以小写开头
 import './public.css'
-import React from "react";
 // 从 React 引入 useState：
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 // React 程序是由"组件"组成的。一个组件是UI(用户界面)的一部分, 它拥有自己的逻辑和外观。
 // 组件可以小到一个按钮,也可以大到整个页面
@@ -113,7 +112,7 @@ function App() {
             <MyButton></MyButton>
             <br/>
             <MyButton></MyButton>
-            
+
         </>
     )
 }

@@ -3,7 +3,7 @@
 // react 组件必须以大写开头 而HTML标签则必须以小写开头
 import './public.css'
 // 从 React 引入 useState：
-import {useState} from 'react';
+import React, {useState} from 'react';
 
 interface MyButton {
     count: number;
