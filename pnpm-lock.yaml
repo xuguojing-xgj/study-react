@@ -1209,8 +1209,8 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: registry.npmmirror.com/browserslist@4.22.1
-      caniuse-lite: registry.npmmirror.com/caniuse-lite@1.0.30001547
-      fraction.js: registry.npmmirror.com/fraction.js@4.3.6
+      caniuse-lite: registry.npmmirror.com/caniuse-lite@1.0.30001549
+      fraction.js: registry.npmmirror.com/fraction.js@4.3.7
       normalize-range: registry.npmmirror.com/normalize-range@0.1.2
       picocolors: registry.npmmirror.com/picocolors@1.0.0
       postcss: registry.npmmirror.com/postcss@8.4.31
@@ -1255,8 +1255,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: registry.npmmirror.com/caniuse-lite@1.0.30001547
-      electron-to-chromium: registry.npmmirror.com/electron-to-chromium@1.4.551
+      caniuse-lite: registry.npmmirror.com/caniuse-lite@1.0.30001549
+      electron-to-chromium: registry.npmmirror.com/electron-to-chromium@1.4.554
       node-releases: registry.npmmirror.com/node-releases@2.0.13
       update-browserslist-db: registry.npmmirror.com/update-browserslist-db@1.0.13(browserslist@4.22.1)
     dev: true
@@ -1275,10 +1275,10 @@ packages:
     engines: {node: '>= 6'}
     dev: true
 
-  registry.npmmirror.com/caniuse-lite@1.0.30001547:
-    resolution: {integrity: sha512-W7CrtIModMAxobGhz8iXmDfuJiiKg1WADMO/9x7/CLNin5cpSbuBjooyoIUVB5eyCc36QuTVlkVa1iB2S5+/eA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001547.tgz}
+  registry.npmmirror.com/caniuse-lite@1.0.30001549:
+    resolution: {integrity: sha512-qRp48dPYSCYaP+KurZLhDYdVE+yEyht/3NlmcJgVQ2VMGt6JL36ndQ/7rgspdZsJuxDPFIo/OzBT2+GmIJ53BA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001549.tgz}
     name: caniuse-lite
-    version: 1.0.30001547
+    version: 1.0.30001549
     dev: true
 
   registry.npmmirror.com/chalk@4.1.2:
@@ -1442,10 +1442,10 @@ packages:
     version: 1.12.4
     dev: false
 
-  registry.npmmirror.com/electron-to-chromium@1.4.551:
-    resolution: {integrity: sha512-/Ng/W/kFv7wdEHYzxdK7Cv0BHEGSkSB3M0Ssl8Ndr1eMiYeas/+Mv4cNaDqamqWx6nd2uQZfPz6g25z25M/sdw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.551.tgz}
+  registry.npmmirror.com/electron-to-chromium@1.4.554:
+    resolution: {integrity: sha512-Q0umzPJjfBrrj8unkONTgbKQXzXRrH7sVV7D9ea2yBV3Oaogz991yhbpfvo2LMNkJItmruXTEzVpP9cp7vaIiQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.554.tgz}
     name: electron-to-chromium
-    version: 1.4.551
+    version: 1.4.554
     dev: true
 
   registry.npmmirror.com/entities@4.5.0:
@@ -1732,10 +1732,10 @@ packages:
     version: 3.2.7
     dev: true
 
-  registry.npmmirror.com/fraction.js@4.3.6:
-    resolution: {integrity: sha512-n2aZ9tNfYDwaHhvFTkhFErqOMIb8uyzSQ+vGJBjZyanAKZVbGUQ1sngfk9FdkBw7G26O7AgNjLcecLffD1c7eg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fraction.js/-/fraction.js-4.3.6.tgz}
+  registry.npmmirror.com/fraction.js@4.3.7:
+    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fraction.js/-/fraction.js-4.3.7.tgz}
     name: fraction.js
-    version: 4.3.6
+    version: 4.3.7
     dev: true
 
   registry.npmmirror.com/fs.realpath@1.0.0:
@@ -2295,7 +2295,7 @@ packages:
     dependencies:
       lilconfig: registry.npmmirror.com/lilconfig@2.1.0
       postcss: registry.npmmirror.com/postcss@8.4.31
-      yaml: registry.npmmirror.com/yaml@2.3.2
+      yaml: registry.npmmirror.com/yaml@2.3.3
     dev: true
 
   registry.npmmirror.com/postcss-nested@6.0.1(postcss@8.4.31):
@@ -3431,10 +3431,10 @@ packages:
     version: 4.0.0
     dev: true
 
-  registry.npmmirror.com/yaml@2.3.2:
-    resolution: {integrity: sha512-N/lyzTPaJasoDmfV7YTrYCI0G/3ivm/9wdG0aHuheKowWQwGTsK0Eoiw6utmzAnI6pkJa0DUVygvp3spqqEKXg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/yaml/-/yaml-2.3.2.tgz}
+  registry.npmmirror.com/yaml@2.3.3:
+    resolution: {integrity: sha512-zw0VAJxgeZ6+++/su5AFoqBbZbrEakwu+X0M5HmcwUiBL7AzcuPKjj5we4xfQLp78LkEMpD0cOnUhmgOVy3KdQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/yaml/-/yaml-2.3.3.tgz}
     name: yaml
-    version: 2.3.2
+    version: 2.3.3
     engines: {node: '>= 14'}
     dev: true
 
