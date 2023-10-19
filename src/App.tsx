@@ -2,50 +2,11 @@
 
 // 导入
 import ProfileCom from './components/Profile.tsx';
-import {getImageUrl} from './components/utils.tsx';
-import type {GetImageUrlTpye} from './components/utils.tsx';
-
+import {EditOutlined, EyeInvisibleOutlined, EyeTwoTone,CheckCircleOutlined} from "@ant-design/icons";
+import {useState} from 'react';
+import {Input,} from 'antd';
 // 组件
-// 将props传递给一个组件
-const Card = ({children}) => {
-    return (
-        <>
-            <div className="card">
-                {children}
-            </div>
-        </>
-    )
-}
 
-const Avatar = ({person, size}:GetImageUrlTpye) => {
-    return (
-        <>
-            <img
-                className={'avatar'}
-                src={getImageUrl(person)}
-                alt={person.name}
-                width={size}
-                height={size}
-            />
-        </>
-    )
-}
-const Profile = () => {
-    return (
-        <>
-            <img src="https://i.imgur.com/MK3eW3As.jpg"
-                 alt="Katherine Johnson"/>
-
-            <Card>
-                <Avatar size={100} person={{
-                    name: 'Katsuko Saruhashi',
-                    imageId: 'YfeOqp2'
-                }}>
-                </Avatar>
-            </Card>
-        </>
-    )
-}
 
 // 使用 jsx编写标签 & 在jsx中使用大括号编写JavaScript
 
@@ -87,17 +48,46 @@ function TodoList() {
 }
 
 function App() {
+
+    const [password, setPassword] = useState('********');
+    const [isShow, setIsShow] = useState(false);
+    const setPwdFunc = () => {
+        setIsShow(!isShow)
+    }
+    const savePwdFunc = () => {
+        setIsShow(!isShow)
+    }
     return (
         <>
             <section>
                 <h1>
                     Amazing scientists
                 </h1>
-                <Profile></Profile>
-                <Profile></Profile>
-                <Profile></Profile>
+
                 <ProfileCom></ProfileCom>
                 <TodoList></TodoList>
+
+                <br/>
+
+                <div>
+                    <span>
+                        密码:
+                        {
+                            isShow ? (<Input.Password
+                                placeholder="input password"
+                                style={{width: 200}}
+                                iconRender={(visible) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />) : (<span>  {password.replace(password,'******')}  </span>)
+                        }
+                        {
+                            isShow ? ( <CheckCircleOutlined style={{cursor: "pointer"}} onClick={savePwdFunc}/>) : (<EditOutlined style={{cursor: "pointer"}} onClick={setPwdFunc}/>)
+                        }
+
+                    </span>
+
+                </div>
             </section>
         </>
     )

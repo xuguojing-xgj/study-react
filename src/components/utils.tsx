@@ -1,8 +1,11 @@
- export interface GetImageUrlTpye {
-    person: {
-        name?: string;
-        imageId: string;
-    };
+export interface Person {
+    name?: string;
+    imageId: string;
+
+}
+
+export interface GetImageUrlTpye {
+    person: Person;
     size: string | number;
 }
 
