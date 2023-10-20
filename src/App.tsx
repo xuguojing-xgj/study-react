@@ -2,8 +2,8 @@
 
 // 导入
 import ProfileCom from './components/Profile.tsx';
-import {EditOutlined, EyeInvisibleOutlined, EyeTwoTone,CheckCircleOutlined} from "@ant-design/icons";
-import {useState} from 'react';
+import {EditOutlined, CheckCircleOutlined} from "@ant-design/icons";
+import React, {useState} from 'react';
 import {Input,} from 'antd';
 // 组件
 
@@ -24,7 +24,7 @@ function TodoList() {
         {id: 2, title: 'Rehearse a movie scene'},
         {id: 3, title: 'Improve spectrum technology'}
     ]
-    const Itemsli = list.map((item) => {
+    const Items: React.ReactNode = list.map((item: { id: number, title: string }) => {
             return (
                 <li key={item.id}>
                     {item.title}
@@ -41,15 +41,14 @@ function TodoList() {
                 className="photo"
             />
             <ul>
-                {Itemsli}
+                {Items}
             </ul>
         </>
     );
 }
 
-function App() {
-
-    const [password, setPassword] = useState('********');
+const Password = () => {
+    const [password, setPassword] = useState('');
     const [isShow, setIsShow] = useState(false);
     const setPwdFunc = () => {
         setIsShow(!isShow)
@@ -57,6 +56,41 @@ function App() {
     const savePwdFunc = () => {
         setIsShow(!isShow)
     }
+
+    interface PwdType {
+        str: string
+    }
+
+    // 密码脱敏
+    const pwdDesensitize = ({str}: PwdType) => {
+        return str.replace(/\w/g, '*')
+    }
+    return (
+        <>
+          <span>
+               密码:
+              {
+                  isShow ? (<Input
+                      placeholder="input password"
+                      style={{width: 200}}
+                      bordered={false}
+                      value={password}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                  />) : (<span>  {pwdDesensitize({str: password})}  </span>)
+              }
+              {
+                  isShow ? (<CheckCircleOutlined style={{cursor: "pointer"}} onClick={savePwdFunc}/>) : (
+                      <EditOutlined style={{cursor: "pointer"}} onClick={setPwdFunc}/>)
+              }
+
+          </span>
+        </>
+    )
+}
+
+function App() {
+
+
     return (
         <>
             <section>
@@ -70,23 +104,7 @@ function App() {
                 <br/>
 
                 <div>
-                    <span>
-                        密码:
-                        {
-                            isShow ? (<Input.Password
-                                placeholder="input password"
-                                style={{width: 200}}
-                                iconRender={(visible) => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />) : (<span>  {password.replace(password,'******')}  </span>)
-                        }
-                        {
-                            isShow ? ( <CheckCircleOutlined style={{cursor: "pointer"}} onClick={savePwdFunc}/>) : (<EditOutlined style={{cursor: "pointer"}} onClick={setPwdFunc}/>)
-                        }
-
-                    </span>
-
+                    <Password></Password>
                 </div>
             </section>
         </>
