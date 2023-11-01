@@ -19,7 +19,7 @@ import Gallery from "./components/Gallery.tsx";
 // 在同一个文件中 使用具名导出和默认导出
 // 具名导出  使用 {} 来导入
 import {Profile} from "./components/Gallery.tsx";
-import React from 'react';
+import React, {useState} from 'react';
 import {Space, Table, Tag} from 'antd';
 import type {ColumnsType} from 'antd/es/table';
 
@@ -76,7 +76,7 @@ const columns: ColumnsType<DataType> = [
         title: 'Tags',
         key: 'tags',
         dataIndex: 'tags',
-        render: (_, {tags},index) => (
+        render: (_, {tags}, index) => (
             <>
                 {'当前行的值:'}{_}
                 {'当前行数据:'}{tags}
@@ -87,12 +87,12 @@ const columns: ColumnsType<DataType> = [
                         color = 'volcano';
                     }
                     return (
-                      <>
-                          {'当前tag:'}{tag}
-                          <Tag color={color} key={tag}>
-                              {tag.toUpperCase()}
-                          </Tag>
-                      </>
+                        <>
+                            {'当前tag:'}{tag}
+                            <Tag color={color} key={tag}>
+                                {tag.toUpperCase()}
+                            </Tag>
+                        </>
 
                     );
                 })}
@@ -114,18 +114,85 @@ const columns: ColumnsType<DataType> = [
 /**
  *
  * @constructor
- * columns 表格列配置  类型: ColumnsType[]
+ * columns 表格列配置  类型: ColumnsType[] 每列数据配置 包括头部
+ * dataSource 数据源
+ * pagination 是否显示分页
  * render函数 生成复杂数据的渲染函数 参数: 1.当前行的值 2.当前行的数据 3.行索引
  */
 const MyTable: React.FC = () => <Table columns={columns} dataSource={data} pagination={false}></Table>
 
+interface SyntaxDataType {
+    key: string;
+    name: string;
+    exportSyntax: string;
+    importSyntax: string;
+}
+
+const syntaxData: SyntaxDataType[] = [
+    {
+        key: '1',
+        name: '默认',
+        exportSyntax: 'export default function Button() {}',
+        importSyntax: 'import Button from \'./Button\';',
+    },
+    {
+        key: '2',
+        name: '具名',
+        exportSyntax: 'export function Button() {}',
+        importSyntax: 'import { Button } from \'./Button\';',
+    }
+]
+// render函数 生成复杂数据的渲染函数 参数: 1.当前行的值 2.当前行的数据 3.行索引
+const syntaxColumns: ColumnsType<SyntaxDataType> = [
+    {
+        title: '语法',
+        dataIndex: 'syntax',
+        key: 'syntax',
+        render: (_, row) => {
+            return (
+                <>
+                    <span>{row.name}</span>
+                </>
+            )
+        }
+    },
+    {
+        title: '导出',
+        dataIndex: 'exportSyntax',
+        key: 'exportSyntax',
+        render: (_, row) => {
+            return (
+                <>
+                    <Tag color={'geekblue'}>{row.exportSyntax}
+                    </Tag>
+                </>
+            )
+        }
+    },
+    {
+        title: '导入',
+        dataIndex: 'importSyntax',
+        key: 'importSyntax',
+        render: (_, row) => (
+            <>
+                <Tag color={'green'}>{row.importSyntax}</Tag>
+            </>
+        )
+    }
+]
+
+const SyntaxTbale = () => <Table columns={syntaxColumns} dataSource={syntaxData} pagination={false}> </Table>
+
 function App() {
+    const [isTable,] = useState<boolean>(false)
     return (
         <>
             <Gallery></Gallery>
             <Profile></Profile>
 
-            <MyTable></MyTable>
+            {
+                isTable ? (<MyTable></MyTable>) : (<SyntaxTbale></SyntaxTbale>)
+            }
         </>
     )
 }
