@@ -22,6 +22,8 @@ import {Profile} from "./components/Gallery.tsx";
 import React, {useState} from 'react';
 import {Space, Table, Tag} from 'antd';
 import type {ColumnsType} from 'antd/es/table';
+import {getImageUrl} from './components/utils.tsx';
+import './public.css';
 
 interface DataType {
     key: string;
@@ -183,6 +185,26 @@ const syntaxColumns: ColumnsType<SyntaxDataType> = [
 
 const SyntaxTbale = () => <Table columns={syntaxColumns} dataSource={syntaxData} pagination={false}> </Table>
 
+// 熟悉props Props 是我们自己传递给JSX标签的信息 但我们可以把任何的Props传递给自己的组建
+
+// 定义组件
+
+// 步骤二： 在子组件读取Props
+const Avatar = ({person,size}:{person:any,size:number}) => {
+    return (
+        <>
+            {/*{person}*/}
+             <img
+                 className="avatar"
+                 src={getImageUrl({person,size})}
+                 alt={person.name}
+                 width={size}
+                 height={size}
+             />
+        </>
+    )
+}
+
 function App() {
     const [isTable,] = useState<boolean>(false)
     return (
@@ -193,6 +215,10 @@ function App() {
             {
                 isTable ? (<MyTable></MyTable>) : (<SyntaxTbale></SyntaxTbale>)
             }
+            {/*步骤一：将Props传递给子组件*/}
+            {/*例如： person(一个对象) 和 size (一个数字)*/}
+            {/*person=后面的双花括号 在JSX模板中它们只是一个对象*/}
+            <Avatar person={{name:'Lin Lanying',imageId:'1bX5QH6'}} size={100} ></Avatar>
         </>
     )
 }

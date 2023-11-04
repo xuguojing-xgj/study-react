@@ -1,5 +1,5 @@
 export interface Person {
-    name?: string;
+    name: string;
     imageId: string;
 
 }
@@ -9,9 +9,10 @@ export interface GetImageUrlTpye {
     size: string | number;
 }
 
- export function getImageUrl({person, size = 's'}: GetImageUrlTpye) {
+ export function getImageUrl({person, size}: GetImageUrlTpye) {
+     console.log(size)
     return (
-        'https://i.imgur.com/' + person.imageId + size + '.jpg'
+        'https://i.imgur.com/' + person.imageId + '.jpg'
     )
 }
 

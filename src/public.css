@@ -6,7 +6,7 @@ body {
     width: 100vh;
     min-height: 100vh;
     font-family: sans-serif;
-    margin: 100px auto;
+    /*margin: 10px auto;*/
     padding: 0;
     /*background: linear-gradient(to bottom right, blue, pink);*/
 }
