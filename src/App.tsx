@@ -218,27 +218,10 @@ function App() {
             {/*步骤一：将Props传递给子组件*/}
             {/*例如： person(一个对象) 和 size (一个数字)*/}
             {/*person=后面的双花括号 在JSX模板中它们只是一个对象*/}
-            <Avatar
-                size={100}
-                person={{
-                name: 'Katsuko Saruhashi',
-                imageId: 'YfeOqp2'
-                }}
-             />
-            <Avatar
-                size={80}
-                person={{
-                    name: 'Aklilu Lemma',
-                    imageId: 'OKS67lh'
-                }}
-            />
-            <Avatar
-                size={50}
-                person={{
-                    name: 'Lin Lanying',
-                    imageId: '1bX5QH6'
-                }}
-            />
+            <Avatar  size={100} person={{  name: 'Katsuko Saruhashi', imageId: 'YfeOqp2' }} />
+            <Avatar  size={80}  person={{  name: 'Aklilu Lemma',  imageId: 'OKS67lh' }} />
+            <Avatar  size={50}  person={{  name: 'Lin Lanying',  imageId: '1bX5QH6'  }}  />
+            
         </>
     )
 }
