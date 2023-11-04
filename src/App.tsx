@@ -224,7 +224,7 @@ function App() {
                 name: 'Katsuko Saruhashi',
                 imageId: 'YfeOqp2'
                 }}
-             / >
+             />
             <Avatar
                 size={80}
                 person={{
