@@ -190,9 +190,16 @@ const SyntaxTbale = () => <Table columns={syntaxColumns} dataSource={syntaxData}
 // 定义组件
 
 // 步骤二： 在子组件读取Props
+// Props 可以让你独立思考父组件和子组件
+// 例如 App 中的三个Avatar 可以改变 person 和 size 并不用考虑 如何使用它们
+// 同样，也可以改变Avatar使用这些props方式 不考虑App
+// 改写props 可以将props想象成一个'旋钮'， 它的作用与函数的参数相同 props正是组件的唯一参数
+// React组件函数接受一个参数， 一个props对象
 const Avatar = ({person,size}:{person:any,size:number}) => {
+
     return (
         <>
+
             {/*{person}*/}
              <img
                  className="avatar"
@@ -204,6 +211,41 @@ const Avatar = ({person,size}:{person:any,size:number}) => {
         </>
     )
 }
+
+
+// 改写Avatar组件
+interface Person {
+    name: string;
+    imageId: string;
+}
+interface PropsType {
+    person: Person;
+    size: number
+}
+// 熟悉类型
+// 解构 等价与从函数参数中读取属性
+const RewriteAvatar = (props : PropsType) => {
+    console.log('props',props)
+    let person = props.person
+    let size = props.size
+    console.log(person)
+    console.log(size)
+    return (
+        <>
+
+        </>
+    )
+
+}
+
+// 给 prop 指定一个默认值
+// 如果 在没有指定值的情况下给prop一个默认值 可以通过在参数后面写 = 和 默认值来进行解构
+// 例如 ：
+// const Avatar = ({person, size = 100 }) => {}
+
+// 如果 <Avatar person={...} /> 渲染时 size 没有prop 则会被赋值为 100
+// 默认值仅会在缺少 size 和 size 是 undefined 时生效 如果传递了 size={null} 或 size={0} 时默认值则不被使用
+
 
 function App() {
     const [isTable,] = useState<boolean>(false)
@@ -221,7 +263,9 @@ function App() {
             <Avatar  size={100} person={{  name: 'Katsuko Saruhashi', imageId: 'YfeOqp2' }} />
             <Avatar  size={80}  person={{  name: 'Aklilu Lemma',  imageId: 'OKS67lh' }} />
             <Avatar  size={50}  person={{  name: 'Lin Lanying',  imageId: '1bX5QH6'  }}  />
-            
+
+            {/* 改写 Avatar 组件 */}
+            <RewriteAvatar size={50}  person={{  name: 'Lin Lanying',  imageId: '1bX5QH6'  }}></RewriteAvatar>
         </>
     )
 }
