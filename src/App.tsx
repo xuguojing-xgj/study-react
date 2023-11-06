@@ -195,7 +195,11 @@ const SyntaxTbale = () => <Table columns={syntaxColumns} dataSource={syntaxData}
 // 同样，也可以改变Avatar使用这些props方式 不考虑App
 // 改写props 可以将props想象成一个'旋钮'， 它的作用与函数的参数相同 props正是组件的唯一参数
 // React组件函数接受一个参数， 一个props对象
-const Avatar = ({person,size}:{person:any,size:number}) => {
+interface PersonType {
+    name: string;
+    imageId: string;
+}
+const Avatar = ({person,size}:{person:PersonType,size:number}) => {
 
     return (
         <>

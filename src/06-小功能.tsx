@@ -1,7 +1,6 @@
 // 在jsx/tsx中使用大括号编写(读取)JavaScript
 
 // 导入
-import ProfileCom from './components/Profile.tsx';
 import {EditOutlined, CheckCircleOutlined} from "@ant-design/icons";
 import React, {useState} from 'react';
 import {Input,} from 'antd';
@@ -96,8 +95,6 @@ function App() {
                 <h1>
                     Amazing scientists
                 </h1>
-
-                <ProfileCom></ProfileCom>
                 <TodoList></TodoList>
 
                 <br/>
