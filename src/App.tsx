@@ -226,8 +226,8 @@ interface PropsType {
 // 解构 等价与从函数参数中读取属性
 const RewriteAvatar = (props : PropsType) => {
     console.log('props',props)
-    let person = props.person
-    let size = props.size
+    const person = props.person
+    const size = props.size
     console.log(person)
     console.log(size)
     return (
