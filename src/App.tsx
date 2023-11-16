@@ -17,11 +17,14 @@ function App() {
     return (
         <>
             <div className={'landscape'}>
-                <div></div>
-                {/*<img className={'_a3img'} src={_a3} alt={''}/>*/}
-                {/*<img className={'_a3img'} src={_a7} alt={''}/>*/}
-                {/*<img className={'_a3img'} src={_a8} alt={''}/>*/}
-                <img className={'_a3img'} src={_a9} alt={''}/>
+              <div className={'son'}>
+                  {/*宋代苏轼的《点绛唇·闲倚胡床》 */}
+                  <div className={'sizeStyle'}>闲倚胡床，庾公楼外峰千朵。与谁同坐。明月清风我。</div>
+                  {/*<img className={'_a3img'} src={_a3} alt={''}/>*/}
+                  {/*<img className={'_a3img'} src={_a7} alt={''}/>*/}
+                  {/*<img className={'_a3img'} src={_a8} alt={''}/>*/}
+                  <img className={'_a3img'} src={_a9} alt={''}/>
+              </div>
             </div>
         </>
     )
