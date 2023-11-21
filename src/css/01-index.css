@@ -1,3 +1,7 @@
+body {
+    /*background: #00dbde;*/
+}
+
 
 .landscape {
     width: 100%;
@@ -17,6 +21,7 @@
 .sizeStyle {
     font-weight: 700;
     font-size: 24px;
+    color: #fc00ff;
     font-family: Cuprum, sans-serif;
     margin: 30px 0;
 }
