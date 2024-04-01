@@ -7,10 +7,28 @@
 // 第三步添加标签 function Profile() { return ( <> <h1> hello world </h1> </> ) }
 // 组件返回 JSX标签
 
+import { useState } from "react";
 import "./css/01-index.css";
 
 function App() {
-	return <></>;
+  const [num, setNum] = useState(() => {
+    const num1 = 1 + 2;
+    const num2 = 2 + 3;
+
+    return num1 + num2;
+  });
+
+    console.log(num); // 8
+    
+    const ClickFunction = () => {
+        setNum(perv => perv + 1)
+    }
+
+  return (
+    <>
+      <div onClick={ClickFunction}> {num} </div>
+    </>
+  );
 }
 
 export default App;
