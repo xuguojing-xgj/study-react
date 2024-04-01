@@ -7,14 +7,10 @@
 // 第三步添加标签 function Profile() { return ( <> <h1> hello world </h1> </> ) }
 // 组件返回 JSX标签
 
-import './css/01-index.css';
+import "./css/01-index.css";
 
 function App() {
-
-    return (
-        <>
-        </>
-    )
+	return <></>;
 }
 
-export default App
+export default App;
