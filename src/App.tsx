@@ -7,8 +7,18 @@
 // 第三步添加标签 function Profile() { return ( <> <h1> hello world </h1> </> ) }
 // 组件返回 JSX标签
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/01-index.css";
+
+async function queryData() {
+  const data = await new Promise<number>((resolve) => {
+    setTimeout(() => {
+      resolve(666);
+    }, 2000);
+  });
+
+  return data;
+}
 
 function App() {
   const [num, setNum] = useState(() => {
@@ -18,12 +28,19 @@ function App() {
     return num1 + num2;
   });
 
-    console.log(num); // 8
-    
-    const ClickFunction = () => {
-        setNum(perv => perv + 1)
-    }
+  console.log(num); // 8
 
+  const ClickFunction = () => {
+    setNum((perv) => perv + 1);
+  };
+
+  // 当依赖数组变化时就会执行 useEffect
+  useEffect(() => {
+    console.log("xxx");
+    queryData().then((res) => {
+      setNum(res);
+    });
+  }, []); // 依赖数组
   return (
     <>
       <div onClick={ClickFunction}> {num} </div>
