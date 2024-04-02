@@ -1,13 +1,7 @@
 // 使用typescript编写react
 
 // 内联语法
-import {
-	useState,
-	useReducer,
-	createContext,
-	useContext,
-	useMemo,
-} from "react";
+import React, { useState, useReducer, createContext, useContext, useMemo } from "react";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { Button, Steps, FloatButton } from "antd";
 import "./public.css";
@@ -32,13 +26,7 @@ interface MyButtonProps {
 	clickFunc: () => void;
 }
 
-const MyBottons = ({
-	diffEnabled,
-	diffStatus,
-	title,
-	disabled,
-	clickFunc,
-}: MyButtonProps) => {
+const MyBottons = ({ diffEnabled, diffStatus, title, disabled, clickFunc }: MyButtonProps) => {
 	return (
 		<>
 			<h5> {diffEnabled} </h5>
@@ -63,9 +51,7 @@ interface State {
 	count: number;
 }
 
-type CounterAction =
-	| { type: "reset" }
-	| { type: "setCount"; value: State["count"] };
+type CounterAction = { type: "reset" } | { type: "setCount"; value: State["count"] };
 
 const initialState: State = { count: 0 };
 
@@ -173,13 +159,7 @@ function App() {
 		<>
 			<MyButton title={"我是一个按钮"} name={"小明"}></MyButton>
 			<br />
-			<MyBottons
-				diffEnabled={enabled}
-				diffStatus={status}
-				title={"我是禁用按钮"}
-				disabled={false}
-				clickFunc={fatherFunc}
-			></MyBottons>
+			<MyBottons diffEnabled={enabled} diffStatus={status} title={"我是禁用按钮"} disabled={false} clickFunc={fatherFunc}></MyBottons>
 			<br />
 			<h3>计数器</h3>
 			<p>计数: {state.count}</p>
@@ -219,13 +199,7 @@ function App() {
 				]}
 			/>
 
-			<FloatButton.Group
-				open={open}
-				trigger="click"
-				style={{ right: 24 }}
-				onOpenChange={onChange}
-				icon={<CustomerServiceOutlined />}
-			>
+			<FloatButton.Group open={open} trigger="click" style={{ right: 24 }} onOpenChange={onChange} icon={<CustomerServiceOutlined />}>
 				<FloatButton />
 				<FloatButton icon={<CommentOutlined />} />
 			</FloatButton.Group>

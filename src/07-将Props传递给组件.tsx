@@ -25,94 +25,94 @@ import { getImageUrl } from "./components/utils.tsx";
 import "./public.css";
 
 interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
+	key: string;
+	name: string;
+	age: number;
+	address: string;
+	tags: string[];
 }
 
 const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher", "hello"],
-  },
+	{
+		key: "1",
+		name: "John Brown",
+		age: 32,
+		address: "New York No. 1 Lake Park",
+		tags: ["nice", "developer"],
+	},
+	{
+		key: "2",
+		name: "Jim Green",
+		age: 42,
+		address: "London No. 1 Lake Park",
+		tags: ["loser"],
+	},
+	{
+		key: "3",
+		name: "Joe Black",
+		age: 32,
+		address: "Sydney No. 1 Lake Park",
+		tags: ["cool", "teacher", "hello"],
+	},
 ];
 
 const columns: ColumnsType<DataType> = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }, index) => (
-      <>
-        {"当前行的值:"}
-        {_}
-        {"当前行数据:"}
-        {tags}
-        {"当前索引:"}
-        {index}
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <>
-              {"当前tag:"}
-              {tag}
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            </>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
+	{
+		title: "Name",
+		dataIndex: "name",
+		key: "name",
+		render: (text) => <a>{text}</a>,
+	},
+	{
+		title: "Age",
+		dataIndex: "age",
+		key: "age",
+	},
+	{
+		title: "Address",
+		dataIndex: "address",
+		key: "address",
+	},
+	{
+		title: "Tags",
+		key: "tags",
+		dataIndex: "tags",
+		render: (_, { tags }, index) => (
+			<>
+				{"当前行的值:"}
+				{_}
+				{"当前行数据:"}
+				{tags}
+				{"当前索引:"}
+				{index}
+				{tags.map((tag) => {
+					let color = tag.length > 5 ? "geekblue" : "green";
+					if (tag === "loser") {
+						color = "volcano";
+					}
+					return (
+						<>
+							{"当前tag:"}
+							{tag}
+							<Tag color={color} key={tag}>
+								{tag.toUpperCase()}
+							</Tag>
+						</>
+					);
+				})}
+			</>
+		),
+	},
+	{
+		title: "Action",
+		key: "action",
+		render: (_, record) => (
+			<Space size="middle">
+				<a>Invite {record.name}</a>
+				<a>Delete</a>
+			</Space>
+		),
+	},
 ];
 
 /**
@@ -123,73 +123,71 @@ const columns: ColumnsType<DataType> = [
  * pagination 是否显示分页
  * render函数 生成复杂数据的渲染函数 参数: 1.当前行的值 2.当前行的数据 3.行索引
  */
-const MyTable: React.FC = () => (
-  <Table columns={columns} dataSource={data} pagination={false}></Table>
-);
+const MyTable: React.FC = () => <Table columns={columns} dataSource={data} pagination={false}></Table>;
 
 interface SyntaxDataType {
-  key: string;
-  name: string;
-  exportSyntax: string;
-  importSyntax: string;
+	key: string;
+	name: string;
+	exportSyntax: string;
+	importSyntax: string;
 }
 
 const syntaxData: SyntaxDataType[] = [
-  {
-    key: "1",
-    name: "默认",
-    exportSyntax: "export default function Button() {}",
-    importSyntax: "import Button from './Button';",
-  },
-  {
-    key: "2",
-    name: "具名",
-    exportSyntax: "export function Button() {}",
-    importSyntax: "import { Button } from './Button';",
-  },
+	{
+		key: "1",
+		name: "默认",
+		exportSyntax: "export default function Button() {}",
+		importSyntax: "import Button from './Button';",
+	},
+	{
+		key: "2",
+		name: "具名",
+		exportSyntax: "export function Button() {}",
+		importSyntax: "import { Button } from './Button';",
+	},
 ];
 // render函数 生成复杂数据的渲染函数 参数: 1.当前行的值 2.当前行的数据 3.行索引
 const syntaxColumns: ColumnsType<SyntaxDataType> = [
-  {
-    title: "语法",
-    dataIndex: "syntax",
-    key: "syntax",
-    render: (_, row) => {
-      return (
-        <>
-          <span>{row.name}</span>
-        </>
-      );
-    },
-  },
-  {
-    title: "导出",
-    dataIndex: "exportSyntax",
-    key: "exportSyntax",
-    render: (_, row) => {
-      return (
-        <>
-          <Tag color={"geekblue"}>{row.exportSyntax}</Tag>
-        </>
-      );
-    },
-  },
-  {
-    title: "导入",
-    dataIndex: "importSyntax",
-    key: "importSyntax",
-    render: (_, row) => (
-      <>
-        <Tag color={"green"}>{row.importSyntax}</Tag>
-      </>
-    ),
-  },
+	{
+		title: "语法",
+		dataIndex: "syntax",
+		key: "syntax",
+		render: (_, row) => {
+			return (
+				<>
+					<span>{row.name}</span>
+				</>
+			);
+		},
+	},
+	{
+		title: "导出",
+		dataIndex: "exportSyntax",
+		key: "exportSyntax",
+		render: (_, row) => {
+			return (
+				<>
+					<Tag color={"geekblue"}>{row.exportSyntax}</Tag>
+				</>
+			);
+		},
+	},
+	{
+		title: "导入",
+		dataIndex: "importSyntax",
+		key: "importSyntax",
+		render: (_, row) => (
+			<>
+				<Tag color={"green"}>{row.importSyntax}</Tag>
+			</>
+		),
+	},
 ];
 
 const SyntaxTbale = () => (
-  <Table columns={syntaxColumns} dataSource={syntaxData} pagination={false}>
-    {" "}
-  </Table>
+	<Table columns={syntaxColumns} dataSource={syntaxData} pagination={false}>
+		{" "}
+	</Table>
 );
 
 // 熟悉props Props 是我们自己传递给JSX标签的信息 但我们可以把任何的Props传递给自己的组建
@@ -203,42 +201,36 @@ const SyntaxTbale = () => (
 // 改写props 可以将props想象成一个'旋钮'， 它的作用与函数的参数相同 props正是组件的唯一参数
 // React组件函数接受一个参数， 一个props对象
 interface PersonType {
-  name: string;
-  imageId: string;
+	name: string;
+	imageId: string;
 }
 const Avatar = ({ person, size }: { person: PersonType; size: number }) => {
-  return (
-    <>
-      {/*{person}*/}
-      <img
-        className="avatar"
-        src={getImageUrl({ person, size })}
-        alt={person.name}
-        width={size}
-        height={size}
-      />
-    </>
-  );
+	return (
+		<>
+			{/*{person}*/}
+			<img className="avatar" src={getImageUrl({ person, size })} alt={person.name} width={size} height={size} />
+		</>
+	);
 };
 
 // 改写Avatar组件
 interface Person {
-  name: string;
-  imageId: string;
+	name: string;
+	imageId: string;
 }
 interface PropsType {
-  person: Person;
-  size: number;
+	person: Person;
+	size: number;
 }
 // 熟悉类型
 // 解构 等价与从函数参数中读取属性
 const RewriteAvatar = (props: PropsType) => {
-  console.log("props", props);
-  const person = props.person;
-  const size = props.size;
-  console.log(person);
-  console.log(size);
-  return <></>;
+	console.log("props", props);
+	const person = props.person;
+	const size = props.size;
+	console.log(person);
+	console.log(size);
+	return <></>;
 };
 
 // 给 prop 指定一个默认值
@@ -251,30 +243,24 @@ const RewriteAvatar = (props: PropsType) => {
 
 //
 function App() {
-  const [isTable] = useState<boolean>(false);
-  return (
-    <>
-      <Gallery></Gallery>
-      <Profile></Profile>
+	const [isTable] = useState<boolean>(false);
+	return (
+		<>
+			<Gallery></Gallery>
+			<Profile></Profile>
 
-      {isTable ? <MyTable></MyTable> : <SyntaxTbale></SyntaxTbale>}
-      {/*步骤一：将Props传递给子组件*/}
-      {/*例如： person(一个对象) 和 size (一个数字)*/}
-      {/*person=后面的双花括号 在JSX模板中它们只是一个对象*/}
-      <Avatar
-        size={100}
-        person={{ name: "Katsuko Saruhashi", imageId: "YfeOqp2" }}
-      />
-      <Avatar size={80} person={{ name: "Aklilu Lemma", imageId: "OKS67lh" }} />
-      <Avatar size={50} person={{ name: "Lin Lanying", imageId: "1bX5QH6" }} />
+			{isTable ? <MyTable></MyTable> : <SyntaxTbale></SyntaxTbale>}
+			{/*步骤一：将Props传递给子组件*/}
+			{/*例如： person(一个对象) 和 size (一个数字)*/}
+			{/*person=后面的双花括号 在JSX模板中它们只是一个对象*/}
+			<Avatar size={100} person={{ name: "Katsuko Saruhashi", imageId: "YfeOqp2" }} />
+			<Avatar size={80} person={{ name: "Aklilu Lemma", imageId: "OKS67lh" }} />
+			<Avatar size={50} person={{ name: "Lin Lanying", imageId: "1bX5QH6" }} />
 
-      {/* 改写 Avatar 组件 */}
-      <RewriteAvatar
-        size={50}
-        person={{ name: "Lin Lanying", imageId: "1bX5QH6" }}
-      ></RewriteAvatar>
-    </>
-  );
+			{/* 改写 Avatar 组件 */}
+			<RewriteAvatar size={50} person={{ name: "Lin Lanying", imageId: "1bX5QH6" }}></RewriteAvatar>
+		</>
+	);
 }
 
 export default App;

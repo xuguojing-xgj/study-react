@@ -2,9 +2,8 @@
     "formatter": {
         "enabled": true,
         "formatWithErrors": false,
-        "indentStyle": "space",
-        "indentSize": 4,
-        "indentWidth": 4,
+        "indentStyle": "tab",
+        "indentWidth": 6,
         "lineWidth": 200,
         "ignore": []
     }
