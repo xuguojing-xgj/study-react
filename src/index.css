@@ -1,3 +1,11 @@
-@layer{@tailwind base;}
-@layer{@tailwind components;}
-@layer{@tailwind utilities;}
+@layer {
+    @tailwind base;
+}
+
+@layer {
+    @tailwind components;
+}
+
+@layer {
+    @tailwind utilities;
+}

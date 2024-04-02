@@ -31,5 +31,6 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "react": "off"
     }
 }

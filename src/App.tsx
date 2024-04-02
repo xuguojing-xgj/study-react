@@ -7,7 +7,7 @@
 // 第三步添加标签 function Profile() { return ( <> <h1> hello world </h1> </> ) }
 // 组件返回 JSX标签
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/01-index.css";
 
 async function queryData() {
