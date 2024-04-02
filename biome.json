@@ -3,7 +3,7 @@
         "enabled": true,
         "formatWithErrors": false,
         "indentStyle": "tab",
-        "indentWidth": 6,
+        "indentWidth": 2,
         "lineWidth": 200,
         "ignore": []
     }
