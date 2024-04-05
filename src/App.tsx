@@ -33,14 +33,14 @@ function App() {
   const ClickFunction = () => {
     setNum((perv) => perv + 1);
   };
-
   // 当依赖数组变化时就会执行 useEffect
+
   useEffect(() => {
     console.log("xxx");
     queryData().then((res) => {
       setNum(res);
     });
-  }, []); // 依赖数组
+  }, [1, 2, 3, 4, "xxx"]); // 依赖数组
   return (
     <>
       <div onClick={ClickFunction}> {num} </div>
