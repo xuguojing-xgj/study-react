@@ -10,5 +10,5 @@ export interface GetImageUrlTpye {
 
 export function getImageUrl({ person, size }: GetImageUrlTpye) {
 	console.log(size);
-	return "https://i.imgur.com/" + person.imageId + ".jpg";
+	return 'https://i.imgur.com/' + person.imageId + '.jpg';
 }
