@@ -21,31 +21,25 @@ async function queryData() {
 }
 
 function App() {
-	const [num, setNum] = useState(() => {
-		const num1 = 1 + 2;
-		const num2 = 2 + 3;
+	const [num, setNum] = useState(0);
 
-		return num1 + num2;
-	});
-
-	//   console.log(num); // 8
-
-	const ClickFunction = () => {
-		setNum((perv) => perv + 1);
-	};
 	// 当依赖数组变化时就会执行 useEffect
-
 	useEffect(() => {
 		console.log('effect');
-
-		// console.log("xxx");
+		const timer = setInterval(() => {
+			console.log(num);
+		}, 1000);
 		// queryData().then((res) => {
 		// 	setNum(res);
 		// });
+		return () => {
+			console.log('clear up');
+			clearInterval(timer);
+		};
 	}, [num]); // 依赖数组
 	return (
 		<>
-			<div onClick={ClickFunction}> {num} </div>
+			<div onClick={() => setNum((prevNum) => prevNum + 1)}> {num} </div>
 		</>
 	);
 }

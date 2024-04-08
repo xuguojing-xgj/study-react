@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from 'react';
 import './public.css';
-import img from './assets/oDHK8m7v0O.jpg';
 import { UserOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd';
 
@@ -11,7 +10,7 @@ const Card = () => {
 		<>
 			<div className={'content'}>
 				<div className={'leftBox'}>
-					<img width={'100%'} height={'100%'} src={img} alt="" />
+					<img width={'100%'} height={'100%'} src={'./assets/oDHK8m7v0O.jpg'} alt="" />
 				</div>
 				<div className={'rightBox'}>
 					<div className={'text'}>
