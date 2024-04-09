@@ -23,7 +23,10 @@ async function queryData() {
 function App() {
 	const [num, setNum] = useState(0);
 
-	// 当依赖数组变化时就会执行 useEffect
+    // 当依赖数组变化时就会执行 useEffect
+    // 类似于 useLayouEffect
+    // useEffect 执行时间长避免页面卡顿掉帧
+    // useLayoutEffect 页面闪动问题比较严重可以使用
 	useEffect(() => {
 		console.log('effect');
 		const timer = setInterval(() => {
