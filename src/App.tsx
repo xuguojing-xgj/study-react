@@ -9,6 +9,7 @@
 
 import React, { useEffect, useLayoutEffect, useState, useReducer } from 'react';
 import type { Reducer } from 'react';
+import useMergedFetch from './components/RequestMerge';
 import './css/01-index.css';
 
 async function queryData() {
@@ -47,7 +48,7 @@ function reducer(state: Data, action: Action) {
 
 function App() {
 	const [num, setNum] = useState(0);
-
+	const { data, error, loading } = useMergedFetch('../public/data.json');
 	// 当依赖数组变化时就会执行 useEffect
 	// 类似于 useLayouEffect
 	// useEffect 执行时间长避免页面卡顿掉帧
@@ -72,6 +73,11 @@ function App() {
 		result: 0
 	});
 
+	const request = () => {
+		console.log(data);
+		console.log(error);
+		console.log(loading);
+	};
 	return (
 		<>
 			<div onClick={() => setNum((prevNum) => prevNum + 1)}> {num} </div>
@@ -84,6 +90,10 @@ function App() {
 			</button>
 
 			<div> {state.result} </div>
+
+			<button type="button" onClick={request}>
+				请求
+			</button>
 		</>
 	);
 }
