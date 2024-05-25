@@ -34,6 +34,7 @@ module.exports = {
         "no-unused-vars": "off",
         "max-len": "off",
         "indent": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-debugger": "off"
     },
 }
