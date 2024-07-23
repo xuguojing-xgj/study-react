@@ -9,6 +9,8 @@ import {
     Row,
     Select,
 } from 'antd';
+import AddTodo from './utils/AddTodo';
+import TaskList from './utils/TaskList';
 import type { CheckboxProps, CascaderProps, AutoCompleteProps } from 'antd';
 
 const { Option } = Select;
@@ -120,7 +122,7 @@ const App = () => {
     function createTodos() {
         console.log('1');
     }
-    const [todos, setTodos] = useState(() => createTodos());
+    // const [todos, setTodos] = useState(() => createTodos());
 
     // 为组件添加状态
     const [age, setAge] = useState(42);
@@ -158,6 +160,53 @@ const App = () => {
                 value: `${value}@${domain}`,
             }));
         });
+    };
+
+    const [aform, setAform] = useState({
+        firstName: 'bar',
+        lastName: 'hep',
+        email: 'a.com',
+        artwork: {
+            title: '1',
+            city: '2',
+        },
+    });
+    let nextId = 3;
+    const initialTodos = [
+        { id: 0, title: 'Buy milk', done: true },
+        { id: 1, title: 'Eat tacos', done: false },
+        { id: 2, title: 'Brew tea', done: false },
+    ];
+    const [todos, setTodos] = useState(initialTodos);
+    const handleAddTodo = (title: string) => {
+        setTodos([
+            ...todos,
+            {
+                id:
+                    todos.length > 3
+                        ? Math.max(...todos.map((todo) => todo.id)) + 1
+                        : 3,
+                title: title,
+                done: false,
+            },
+        ]);
+    };
+
+    const handleChangeTodo = (nextTodo: any) => {
+        setTodos(
+            todos.map((t) => {
+                if (t.id === nextTodo.id) {
+                    return nextTodo;
+                } else {
+                    return t;
+                }
+            })
+        );
+    };
+
+    const handleDeleteTodo = (todoId: any) => {
+        console.log(todoId);
+        setTodos(todos.filter((t) => t.id !== todoId));
     };
     return (
         <>
@@ -442,6 +491,94 @@ const App = () => {
                         </Button>
                     </Form.Item>
                 </Form>
+            </div>
+
+            <div>
+                <label>
+                    First name
+                    <input
+                        type="text"
+                        value={aform.firstName}
+                        onChange={(e) => {
+                            setAform({
+                                ...aform,
+                                firstName: e.target.value,
+                            });
+                        }}
+                    />
+                </label>
+                <label>
+                    last name
+                    <input
+                        type="text"
+                        value={aform.lastName}
+                        onChange={(e) => {
+                            setAform({
+                                ...aform,
+                                lastName: e.target.value,
+                            });
+                        }}
+                    />
+                </label>
+                <label>
+                    title name
+                    <input
+                        type="text"
+                        value={aform.email}
+                        onChange={(e) => {
+                            setAform({
+                                ...aform,
+                                email: e.target.value,
+                            });
+                        }}
+                    />
+                </label>
+                <label>
+                    city name
+                    <input
+                        type="text"
+                        value={aform.artwork.city}
+                        onChange={(e) => {
+                            setAform({
+                                ...aform,
+                                artwork: {
+                                    ...aform.artwork,
+                                    city: e.target.value,
+                                },
+                            });
+                        }}
+                    />
+                </label>
+
+                <label>
+                    First name
+                    <input
+                        type="text"
+                        value={aform.artwork.title}
+                        onChange={(e) => {
+                            setAform({
+                                ...aform,
+                                artwork: {
+                                    ...aform.artwork,
+                                    title: e.target.value,
+                                },
+                            });
+                        }}
+                    />
+                </label>
+                <div>
+                    {aform.firstName} {aform.lastName} {aform.email}
+                    {aform.artwork.title} {aform.artwork.city}
+                </div>
+            </div>
+
+            <div>
+                <AddTodo onAddTodo={handleAddTodo}></AddTodo>
+                <TaskList
+                    todos={todos}
+                    onChangeTodo={handleChangeTodo}
+                    onDeleteTodo={handleDeleteTodo}
+                ></TaskList>
             </div>
         </>
     );
