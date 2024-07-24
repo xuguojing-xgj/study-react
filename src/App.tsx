@@ -193,11 +193,17 @@ const App = () => {
     };
 
     const handleChangeTodo = (nextTodo: any) => {
+        console.log(nextTodo);
         setTodos(
             todos.map((t) => {
+                console.log('t', t);
+                console.log('nextTodo', nextTodo);
+                console.log(t.id === nextTodo.id);
                 if (t.id === nextTodo.id) {
+                    console.log(1123);
                     return nextTodo;
                 } else {
+                    console.log('123111');
                     return t;
                 }
             })

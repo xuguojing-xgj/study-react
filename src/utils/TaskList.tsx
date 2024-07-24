@@ -1,55 +1,41 @@
 import * as React from 'react';
 import { Button, Input } from 'antd';
 export interface TaskType {
-    todo: any;
-    onChange: any;
+    todo: TodoType;
+    onMyChange: any;
     onDelete: any;
 }
 
-export interface TaskListType {
-    todos: any;
-    onChangeTodo: any;
-    onDeleteTodo: any;
-}
-
-const Task = ({ todo, onChange, onDelete }: TaskType) => {
+const Task = ({ todo, onMyChange, onDelete }: TaskType) => {
     const [isEditing, setIsEditing] = React.useState(false);
 
-    const handelTitle = (e: any) => {
-        onChange({
-            ...todo,
-            title: e.target.value,
-        });
-    };
-
-    const handelDone = (e: any) => {
-        onChange({
-            ...todo,
-            done: e.target.checked,
-        });
-    };
     let todoContent;
 
     if (isEditing) {
         todoContent = (
             <>
-                <Input
+                <input
                     value={todo.title}
-                    onChange={handelTitle}
+                    onChange={(e) => {
+                        onMyChange({
+                            ...todo,
+                            title: e.target.value,
+                        });
+                    }}
                     style={{ width: '200px' }}
-                ></Input>
-                <Button type="primary" onClick={() => setIsEditing(false)}>
+                ></input>
+                <button type="button" onClick={() => setIsEditing(false)}>
                     {' Save '}
-                </Button>
+                </button>
             </>
         );
     } else {
         todoContent = (
             <>
                 {todo.title}
-                <Button type="link" onClick={() => setIsEditing(true)}>
+                <button type="button" onClick={() => setIsEditing(true)}>
                     {' Edit '}
-                </Button>
+                </button>
             </>
         );
     }
@@ -60,16 +46,34 @@ const Task = ({ todo, onChange, onDelete }: TaskType) => {
                 <input
                     type="checkbox"
                     checked={todo.done}
-                    onChange={() => handelDone}
+                    onChange={(e) => {
+                        onMyChange({
+                            ...todo,
+                            done: e.target.checked,
+                        });
+                    }}
                 ></input>
                 {todoContent}
-                <Button type="link" danger onClick={() => onDelete(todo.id)}>
+                <button type="button" onClick={() => onDelete(todo.id)}>
                     {'Delete'}
-                </Button>
+                </button>
             </label>
         </>
     );
 };
+
+export interface TodoType {
+    id: number;
+    title: string;
+    done: boolean;
+}
+
+export interface TaskListType {
+    todos: TodoType[];
+    onChangeTodo: any;
+    onDeleteTodo: any;
+}
+
 export default function TaskList({
     todos,
     onChangeTodo,
@@ -78,11 +82,11 @@ export default function TaskList({
     return (
         <>
             <ul>
-                {todos.map((todo: any) => (
+                {todos.map((todo: TodoType) => (
                     <li key={todo.id}>
                         <Task
                             todo={todo}
-                            onChange={onChangeTodo}
+                            onMyChange={onChangeTodo}
                             onDelete={onDeleteTodo}
                         ></Task>
                     </li>
