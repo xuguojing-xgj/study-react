@@ -11,6 +11,7 @@ import {
 } from 'antd';
 import AddTodo from './utils/AddTodo';
 import TaskList from './utils/TaskList';
+import { useImmer } from 'use-immer';
 import type { CheckboxProps, CascaderProps, AutoCompleteProps } from 'antd';
 
 const { Option } = Select;
@@ -76,6 +77,38 @@ const formItemLayout = {
         xs: { span: 24 },
         sm: { span: 16 },
     },
+};
+interface ListType {
+    id: number;
+    title: string;
+    seen: boolean;
+}
+interface ItemListType {
+    artworks: ListType[];
+    onToggle: any;
+}
+
+const ItemList: React.FC<ItemListType> = ({ artworks, onToggle }) => {
+    return (
+        <ul>
+            {artworks.map((artwork: any) => {
+                return (
+                    <li key={artwork.id}>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={artwork.seen}
+                                onChange={(e) => {
+                                    onToggle(artwork.id, e.target.checked);
+                                }}
+                            />
+                            {artwork.title}
+                        </label>
+                    </li>
+                );
+            })}
+        </ul>
+    );
 };
 
 const App = () => {
@@ -213,6 +246,21 @@ const App = () => {
     const handleDeleteTodo = (todoId: any) => {
         console.log(todoId);
         setTodos(todos.filter((t) => t.id !== todoId));
+    };
+
+    const initialList = [
+        { id: 0, title: 'Big Bellies', seen: false },
+        { id: 1, title: 'Lunar Landscape', seen: false },
+        { id: 2, title: 'Terracotta Army', seen: true },
+    ];
+
+    const [list, updateList] = useImmer(initialList);
+
+    const handleToggle = (artworkId: number, nextSeen: boolean) => {
+        updateList((draft) => {
+            const artwork = draft.find((a) => a.id === artworkId)!;
+            artwork.seen = nextSeen;
+        });
     };
     return (
         <>
@@ -586,6 +634,8 @@ const App = () => {
                     onDeleteTodo={handleDeleteTodo}
                 ></TaskList>
             </div>
+
+            <ItemList artworks={list} onToggle={handleToggle}></ItemList>
         </>
     );
 };
