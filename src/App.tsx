@@ -1,51 +1,98 @@
-import React, { useState, useEffect, memo, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useReducer, ChangeEvent } from 'react';
 
-const Acom = () => {
-    const [, setNum] = useState(1);
-    const [count, setCount] = useState(2);
-    useEffect(() => {
-        setInterval(() => {
-            setNum(Math.random());
-        }, 2000);
-    }, []);
+// React 中的受控模式
+// 由用户去改变 代码中通过 onChange 去设置 value 既受控模式
 
-    useEffect(() => {
-        setInterval(() => {
-            setCount(Math.random());
-        }, 2000);
-    }, []);
+// 非受控模式
 
-    const comCallback = useCallback(() => {
-        // xxx
-    }, []);
-
-    const count2 = useMemo(() => {
-        return count * 10;
-    }, [count]);
-    return (
-        <div>
-            <MemoCcom val={count2} callback={comCallback}></MemoCcom>
-        </div>
-    );
-};
-interface Cprops {
-    val: number;
-    callback: Function;
-}
-const Ccom = (porps: Cprops) => {
-    console.log('Ccom  render');
-    return (
-        <div>
-            <div>{porps.val}</div>
-        </div>
-    );
-};
-
-const MemoCcom = memo(Ccom);
+// 代码设置初始值 defaultValue 但是能改变 value 的只有用户 通过 onChange 来拿到最新的值
+// 或者是 ref 拿到 dom 后读取 value
 const App: React.FC = () => {
+    const [val, setVal] = useState('value');
+    console.log('render ...');
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value);
+    };
+
+    const handerOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value);
+        setVal(event.target.value);
+    };
+
+    const [value, setValue] = useState(new Date(''));
     return (
         <div>
-            <Acom></Acom>
+            <div>
+                {/* 非受控模式 */}
+                input:{' '}
+                <input type="text" defaultValue={'value'} onChange={onChange} />
+            </div>
+
+            <div>
+                {/* 受控模式 */}
+                input:{' '}
+                <input type="text" value={val} onChange={handerOnChange} />
+            </div>
+
+            {/* 日历组件 非受控模式 */}
+            <div>
+                <Calendar
+                    defaultValue={new Date('2024-5-1')}
+                    onChange={(date: Date) => {
+                        console.log(date.toLocaleDateString());
+                    }}
+                ></Calendar>
+            </div>
+            {/* 日历组件 受控模式 */}
+            <div>
+                <Calendar
+                    value={value}
+                    onChange={(date: Date) => {
+                        console.log(date.toLocaleDateString());
+                        setValue(date);
+                    }}
+                ></Calendar>
+            </div>
+        </div>
+    );
+};
+
+interface CalendarProps {
+    value?: Date;
+    onChange?: (date: Date) => void;
+}
+
+const Calendar: React.FC = (props: CalendarProps) => {
+    const { value, onChange } = props;
+
+    const changeValue = (date: Date) => {
+        onChange?.(date);
+    };
+
+    return (
+        <div>
+            {value?.toLocaleDateString()}
+            <div
+                onClick={() => {
+                    changeValue(new Date('2024-5-1'));
+                }}
+            >
+                2023-5-1
+            </div>
+            <div
+                onClick={() => {
+                    changeValue(new Date('2024-5-2'));
+                }}
+            >
+                2023-5-2
+            </div>
+            <div
+                onClick={() => {
+                    changeValue(new Date('2024-5-3'));
+                }}
+            >
+                2023-5-3
+            </div>
         </div>
     );
 };
