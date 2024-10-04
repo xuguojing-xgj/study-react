@@ -28,7 +28,7 @@ const reducer = (state: State, action: Action): State => {
 };
 
 const Child: React.ForwardRefRenderFunction<RefProps> = (
-    props,
+    _props: any,
     ref: HTMLElement
 ) => {
     const InputRef = useRef<HTMLInputElement>(null);
