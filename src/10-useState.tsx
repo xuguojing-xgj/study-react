@@ -9,8 +9,8 @@ import {
     Row,
     Select,
 } from 'antd';
-import AddTodo from './utils/AddTodo';
-import TaskList from './utils/TaskList';
+import AddTodo from './utils/AddTodo.tsx';
+import TaskList from './utils/TaskList.tsx';
 import { useImmer } from 'use-immer';
 import type { CheckboxProps, CascaderProps, AutoCompleteProps } from 'antd';
 
@@ -88,7 +88,7 @@ interface ItemListType {
     onToggle: any;
 }
 
-const ItemList: React.FC<ItemListType> = ({ artworks, onToggle }) => {
+const ItemList: React.FC<ItemListType> = ({ artworks, onToggle }: any) => {
     return (
         <ul>
             {artworks.map((artwork: any) => {
@@ -98,7 +98,7 @@ const ItemList: React.FC<ItemListType> = ({ artworks, onToggle }) => {
                             <input
                                 type="checkbox"
                                 checked={artwork.seen}
-                                onChange={(e) => {
+                                onChange={(e: HTMLInputElement) => {
                                     onToggle(artwork.id, e.target.checked);
                                 }}
                             />
