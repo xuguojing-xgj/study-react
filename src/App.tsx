@@ -1,28 +1,97 @@
 import React, { useState, useEffect } from 'react';
+import './css/02-index.css';
 
-// 闭包陷阱
+interface CalendarProps {
+    defaultValue?: Date;
+    onChange?: (date: Date) => void;
+}
+
+const Calendar = (props: CalendarProps) => {
+    const { defaultValue, onChange } = props;
+    const [date, setDate] = useState(defaultValue);
+
+    const handleprevMonth = () => {
+        setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
+    };
+
+    const handleNextMonth = () => {
+        setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+    };
+
+    const monthNames = [
+        '一月',
+        '二月',
+        '三月',
+        '四月',
+        '五月',
+        '六月',
+        '七月',
+        '八月',
+        '九月',
+        '十月',
+        '十一月',
+        '十二月',
+    ];
+
+    const daysOfMonth = (year: number, month: number) => {
+        return new Date(year, month + 1, 0).getDate();
+    };
+
+    const firstDayOfMonth = (year: number, month: number) => {
+        // 返回一个具体日期中一周的第几天，0 表示星期天。对于某个月中的第几天，
+        return new Date(year, month, 1).getDay();
+    };
+
+    const renderDates = () => {
+        const days = [];
+        const daysCount = daysOfMonth(date.getFullYear(), date.getMonth());
+        const firstDay = firstDayOfMonth(date.getFullYear(), date.getMonth());
+
+        for (let i = 0; i < firstDay; i++) {
+            days.push(<div key={`empty-${i}`} className="empty"></div>);
+        }
+
+        for (let i = 1; i <= daysCount; i++) {
+            const isToday = i === date.getDate();
+            days.push(
+                <div key={i} className={`day ${isToday ? 'selected' : ''}`}>
+                    {i}
+                </div>
+            );
+        }
+
+        return days;
+    };
+
+    return (
+        <div className="calendar">
+            <div className="header">
+                <button onClick={handleprevMonth}>&lt;</button>
+                <div>
+                    {date.getFullYear()}年{monthNames[date.getMonth()]}
+                </div>
+                <button onClick={handleNextMonth}>&gt;</button>
+            </div>
+            <div className="days">
+                <div className="day">日</div>
+                <div className="day">一</div>
+                <div className="day">二</div>
+                <div className="day">三</div>
+                <div className="day">四</div>
+                <div className="day">五</div>
+                <div className="day">六</div>
+                {renderDates()}
+            </div>
+        </div>
+    );
+};
 
 const App = () => {
-    // 当 useEffect 依赖数组是 [] 时  count 被永远 "锁定" 在了效果创建时的值
-    // 导致闭包的原因 依赖数组是空值时
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            console.log(count);
-            setCount(count + 1);
-            // 正确示例
-            // 使用函数式更新避免闭包陷阱
-            // setCount(count => count + 1);
-        }, 1000);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, [count]); // 或者正确使用 依赖数组
     return (
         <div>
-            <div>{count}</div>
+            {/* <Calendar></Calendar> */}
+            <Calendar defaultValue={new Date('2023-3-1')}></Calendar>
+            <Calendar defaultValue={new Date('2023-8-1')}></Calendar>
         </div>
     );
 };
