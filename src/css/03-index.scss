@@ -1,6 +1,53 @@
 .calendar {
   width: 100%;
 
+  &-header {
+    width: 300px;
+
+    &-left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 28px;
+      line-height: 28px;
+    }
+
+    &-value {
+      font-size: 20px;
+    }
+
+    &-btn {
+      background-color: #eee;
+      cursor: pointer;
+      border: 0;
+      padding: 0 15px;
+      line-height: 28px;
+
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+
+    &-icon {
+      width: 28px;
+      height: 28px;
+
+      line-height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      cursor: pointer;
+
+      // 排除第一个子元素 剩下的子元素添加样式
+      &:not(:first-child) {
+        margin: 0 12px;
+      }
+
+      &:hover {
+        background: #ccc;
+      }
+    }
+  }
+
   &-month {
     &-week-list {
       display: flex;

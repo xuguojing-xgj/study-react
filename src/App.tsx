@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
+import cs from 'classnames';
 
 import './css/03-index.scss';
 
 interface CalendarProps {
     value: Dayjs;
+    // style 和 className 用于修改 Calendar 组件外层容器
+    style?: CSSProperties;
+    className?: string | string[];
+    // 定制日期显示, 会完全覆盖日期单元格
+    dateRender?: (currentDate: Dayjs) => React.ReactNode;
+    // 定制日期单元格, 内容会被添加到单元格内, 只在全屏日历模式下生效
+    dateInnerContent?: (currentDate: Dayjs) => React.ReactNode;
+    // 国际化相关
+    locale?: string;
+    onChange?: (date: Dayjs) => void;
 }
 
 interface MonthCalendarProps extends CalendarProps {}
@@ -64,6 +75,19 @@ const renderDays = (days: Array<{ date: Dayjs; currentMonth: boolean }>) => {
     ));
 };
 
+const Header = () => {
+    return (
+        <div className="calendar-header">
+            <div className="calendar-header-left">
+                <div className="calendar-header-icon">& lt; </div>
+                <div className="calendar-header-value"> 2024 - 10 - 26 </div>
+                <div className="calendar-header-icon">& gt; </div>
+                <button className="calendar-header-btn"> 今天 </button>
+            </div>
+        </div>
+    );
+};
+
 const MonthCalendatr = (props: MonthCalendarProps) => {
     console.log(props);
 
@@ -79,14 +103,18 @@ const MonthCalendatr = (props: MonthCalendarProps) => {
                 ))}
             </div>
 
-            <div className="calendar-month-body">{renderDays(allDays)}</div>
+            <div className="calendar-month-body"> {renderDays(allDays)} </div>
         </div>
     );
 };
 
 const Calendar = (props: CalendarProps) => {
+    const { value, style, className } = props;
+    const classNames = cs('calendar', className);
+    console.log(classNames);
     return (
-        <div className="calendar">
+        <div className={classNames} style={style}>
+            <Header></Header>
             <MonthCalendatr {...props} />
         </div>
     );
@@ -95,7 +123,7 @@ const Calendar = (props: CalendarProps) => {
 const App = () => {
     return (
         <div>
-            <Calendar value={dayjs('2023-10-10')}></Calendar>
+            <Calendar value={dayjs()}> </Calendar>
         </div>
     );
 };

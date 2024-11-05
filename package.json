@@ -20,6 +20,7 @@
         "ahooks": "^3.8.1",
         "antd": "^5.16.1",
         "autoprefixer": "^10.4.20",
+        "classnames": "^2.5.1",
         "dayjs": "^1.11.13",
         "eslint": "^9.6.0",
         "eslint-plugin-react-hooks": "^5.0.0",
